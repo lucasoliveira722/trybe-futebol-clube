@@ -1,6 +1,6 @@
-import User from '../database/models/User.models';
-import JWT from '../helpers/jwt'
+// import User from '../database/models/User.models';
+// import JWT from '../helpers/jwt'
 
-export default class LoginService {
+// export default class LoginService {
   
-}
+// }

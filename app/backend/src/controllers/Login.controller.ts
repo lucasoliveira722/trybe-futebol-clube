@@ -1,14 +1,14 @@
-import { Request, Response } from 'express';
-import 
+// import { Request, Response } from 'express';
+// import 
 
-export default class LoginController {
-  constructor (private service: ILoginService) {
-    this.service = service;
-  }
+// export default class LoginController {
+//   constructor (private service: ILoginService) {
+//     this.service = service;
+//   }
 
-  async Login(req: Request, res: Response) {
-    const { id, role } = await this.service.login(req.body);
+//   async Login(req: Request, res: Response) {
+//     const { id, role } = await this.service.login(req.body);
 
-    const token = new Token
-  }
-}
+//     const token = new Token
+//   }
+// }
