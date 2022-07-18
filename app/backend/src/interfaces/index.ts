@@ -5,4 +5,8 @@ export interface IUser {
   password: string;
 }
 
-export type IUserLogin = Omit<IUser, 'role' | 'username'>; 
+export type IUserLogin = Omit<IUser, 'role' >; 
+
+export interface IUserModel {
+  findAll(data: Omit<IUser, 'username' | 'role' | 'password'>): IUser
+}
