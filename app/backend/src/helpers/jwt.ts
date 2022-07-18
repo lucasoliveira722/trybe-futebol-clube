@@ -1,16 +1,16 @@
 import { sign, SignOptions, verify } from 'jsonwebtoken';
+// import { IUserLogin } from '../interfaces';
 
 export default class JWT {
   private static jwtSecret = String(process.env.JWT_SECRET);
   private static token: string;
-  // private static jwtSecret = 'jwt_secret';
   private static options: SignOptions = {
     expiresIn: '5d',
     algorithm: 'HS256',
   };
 
   static generateToken(user: object): string {
-    this.token = sign(user, this.jwtSecret, this.options)
+    this.token = sign(user, this.jwtSecret, this.options);
     return this.token;
   }
 

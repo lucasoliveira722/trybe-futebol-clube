@@ -1,7 +1,6 @@
 import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
 
-
 class User extends Model {
   public id!: number;
   public username!: string;
@@ -32,7 +31,7 @@ User.init({
     type: STRING,
     allowNull: false,
   },
-  
+
 }, {
   underscored: true,
   sequelize: db,

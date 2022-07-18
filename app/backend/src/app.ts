@@ -1,4 +1,5 @@
 import * as express from 'express';
+import loginRouter from './Routes/Login.Route';
 
 class App {
   public app: express.Express;
@@ -17,11 +18,14 @@ class App {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
       res.header('Access-Control-Allow-Headers', '*');
+
       next();
     };
 
     this.app.use(express.json());
     this.app.use(accessControl);
+
+    this.app.use('/login', loginRouter);
   }
 
   public start(PORT: string | number):void {
@@ -33,5 +37,3 @@ export { App };
 
 // A execução dos testes de cobertura depende dessa exportação
 export const { app } = new App();
-
-// Mod
