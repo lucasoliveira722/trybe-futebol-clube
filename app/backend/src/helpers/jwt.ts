@@ -1,9 +1,9 @@
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 
 export default class JWT {
-  // private jwtSecret = (process.env.JWT_SECRET);
+  private static jwtSecret = String(process.env.JWT_SECRET);
   private static token: string;
-  private static jwtSecret = 'jwt_secret';
+  // private static jwtSecret = 'jwt_secret';
   private static options: SignOptions = {
     expiresIn: '5d',
     algorithm: 'HS256',
@@ -23,3 +23,4 @@ export default class JWT {
     }
   }
 }
+// Uso do String(env) tirado de https://dev.to/vitordelfino/autenticacao-com-jwt-22o7
