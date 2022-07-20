@@ -1,10 +1,9 @@
 import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
 
-
 class Teams extends Model {
   public id!: number;
-  public team_name!: string;
+  public teamName!: string;
 }
 
 Teams.init({
@@ -13,7 +12,7 @@ Teams.init({
     autoIncrement: true,
     primaryKey: true,
   },
-  team_name: {
+  teamName: {
     type: STRING,
     allowNull: false,
   },
