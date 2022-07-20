@@ -1,5 +1,6 @@
 import { IUserLogin, IUserModel, IUserService } from '../interfaces';
 import JWT from '../helpers/jwt';
+import HttpException from '../middlewares/HttpExceptions';
 
 export default class LoginService implements IUserService {
   constructor(private model: IUserModel) {
@@ -9,6 +10,9 @@ export default class LoginService implements IUserService {
   async login(data: IUserLogin): Promise<string> {
     const [user] = await this.model.findAll(data);
     // const { email, password } = user as IUserLogin;
+    if (!user) {
+      throw new HttpException(401, 'Incorrect email or password');
+    }
     const userGenerateToken = {
       email: user.email,
       password: user.password,
