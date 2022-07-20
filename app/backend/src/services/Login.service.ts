@@ -9,7 +9,6 @@ export default class LoginService implements IUserService {
 
   async login(data: IUserLogin): Promise<string> {
     const [user] = await this.model.findAll(data);
-    // const { email, password } = user as IUserLogin;
     if (!user) {
       throw new HttpException(401, 'Incorrect email or password');
     }
@@ -18,6 +17,10 @@ export default class LoginService implements IUserService {
       password: user.password,
     };
     const newToken = JWT.generateToken(userGenerateToken);
+    // const returnLogin = {
+    //   newToken,
+    //   role: user.role,
+    // };
     return newToken;
   }
 }
