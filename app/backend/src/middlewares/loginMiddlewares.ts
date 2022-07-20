@@ -9,7 +9,7 @@ export default (req: Request, _res: Response, next: NextFunction) => {
   }).validate(req.body);
   if (error) {
     // const obj = { status: 400, message: error.message };
-    throw new HttpException(400, error.message);
+    throw new HttpException(400, 'All fields must be filled');
   }
   next();
 };
