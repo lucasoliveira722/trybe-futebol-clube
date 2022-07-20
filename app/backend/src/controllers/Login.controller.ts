@@ -15,4 +15,9 @@ export default class LoginController {
       next(error);
     }
   }
+
+  static returnRole(req: Request, res: Response) {
+    const { role } = req.body;
+    res.status(200).json(role);
+  }
 }
