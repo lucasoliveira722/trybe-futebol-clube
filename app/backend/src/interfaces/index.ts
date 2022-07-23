@@ -1,3 +1,6 @@
+import { Request } from 'express';
+import { JwtPayload } from 'jsonwebtoken';
+
 export interface IUser {
   username: string;
   email: string;
@@ -14,3 +17,19 @@ export interface IUserModel {
 export interface IUserService {
   login(data: IUserLogin): Promise<string>
 }
+
+export type JwtLogin = {
+  email: string;
+  role: string;
+  password: string;
+};
+
+export interface UserRequest extends Request {
+  user?: JwtPayload
+}
+
+export type TokenResponse = {
+  email: string;
+  role: string;
+  password: string;
+};

@@ -14,8 +14,11 @@ export default class LoginService implements IUserService {
     }
     const userGenerateToken = {
       email: user.email,
+      role: user.role,
       password: user.password,
     };
+    // INSERIR O ROLE NA HORA DE FAZER O TOKEN --
+    // FALTA RECEBER DE VOLTA NA HORA Q PUXA
     const newToken = JWT.generateToken(userGenerateToken);
     return newToken;
   }

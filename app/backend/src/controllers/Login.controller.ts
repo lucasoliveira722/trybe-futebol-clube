@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { IUserService } from '../interfaces';
+import { IUserService, UserRequest, TokenResponse } from '../interfaces';
 
 export default class LoginController {
   constructor(private service: IUserService) {
@@ -16,8 +16,9 @@ export default class LoginController {
     }
   }
 
-  static returnRole(req: Request, res: Response) {
-    const { role } = req.body;
+  static returnRole(req: UserRequest, res: Response) {
+    // ENTENDER PQ ELE NÃO RECONHECE O ROLE DO REQ.USER
+    const { role } = req.user as TokenResponse;
     res.status(200).json(role);
   }
 }
