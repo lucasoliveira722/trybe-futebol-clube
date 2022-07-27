@@ -15,4 +15,17 @@ export default class TeamsController {
       next(error);
     }
   }
+
+  async findByPk(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id, 10);
+    try {
+      const selectedTeam = await this.service.findByPk(id);
+      // if (!selectedTeam) {
+      //   return res.status(400).json({ message: 'Team not found' });
+      // }
+      return res.status(200).json(selectedTeam);
+    } catch (err) {
+      next(err);
+    }
+  }
 }

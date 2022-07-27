@@ -45,8 +45,10 @@ export interface ITeams {
 
 export interface ITeamsModel {
   findAll(): Promise<ITeams[]>
+  findByPk(id: number): Promise<ITeams | null>
 }
 
 export interface ITeamsService {
   findAll(): Promise<ITeams[]>
+  findByPk(id: number): Promise<ITeams | null>
 }

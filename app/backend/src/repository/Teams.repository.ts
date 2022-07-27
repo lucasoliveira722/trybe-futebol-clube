@@ -10,4 +10,12 @@ export default class TeamsRepository implements ITeamsModel {
     const teams = await this.model.findAll();
     return teams;
   }
+
+  async findByPk(id: number): Promise<ITeams | null> {
+    const selectedTeam = await this.model.findByPk(id);
+    // if (!selectedTeam) {
+    //   return false;
+    // }
+    return selectedTeam;
+  }
 }
