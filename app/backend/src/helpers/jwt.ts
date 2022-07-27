@@ -13,14 +13,5 @@ export default class JWT {
     this.token = sign(user, this.jwtSecret, this.options);
     return this.token;
   }
-
-  // static validateToken(token: string) {
-  //   try {
-  //     const result = verify(token, this.jwtSecret);
-  //     return result;
-  //   } catch (error) {
-  //     return null;
-  //   }
-  // }
 }
 // Uso do String(env) tirado de https://dev.to/vitordelfino/autenticacao-com-jwt-22o7

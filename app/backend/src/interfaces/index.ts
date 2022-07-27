@@ -1,5 +1,7 @@
 import { Request } from 'express';
-import { JwtPayload } from 'jsonwebtoken';
+// import { JwtPayload } from 'jsonwebtoken';
+
+// LOGIN INTERFACES
 
 export interface IUser {
   username: string;
@@ -25,7 +27,7 @@ export type JwtLogin = {
 };
 
 export interface UserRequest extends Request {
-  user?: JwtPayload
+  user?: string | object
 }
 
 export type TokenResponse = {
@@ -33,3 +35,18 @@ export type TokenResponse = {
   role: string;
   password: string;
 };
+
+// TEAMS INTERFACES
+
+export interface ITeams {
+  id: number;
+  teamName: string;
+}
+
+export interface ITeamsModel {
+  findAll(): Promise<ITeams[]>
+}
+
+export interface ITeamsService {
+  findAll(): Promise<ITeams[]>
+}

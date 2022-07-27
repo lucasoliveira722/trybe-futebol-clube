@@ -3,7 +3,7 @@ import { Response, NextFunction } from 'express';
 import { UserRequest } from '../interfaces';
 import HttpException from '../middlewares/HttpExceptions';
 
-export default async (req: UserRequest, _res: Response, _next: NextFunction) => {
+export default async (req: UserRequest, _res: Response, next: NextFunction) => {
   const token = req.headers.authorization;
 
   if (!token) {
@@ -11,10 +11,13 @@ export default async (req: UserRequest, _res: Response, _next: NextFunction) => 
   }
   try {
     const result = verify(token, process.env.JWT_SECRET as Secret) as JwtPayload;
-    req.user = result.data;
+    req.user = result;
+    console.log(result);
+
     // Descobrir como funciona esse retorno --
-    // Criar a req.user
+    // Criar a req.user --
+    next();
   } catch (err) {
-    throw new HttpException(401, 'Token invalid; Please provide a valid token');
+    next(err);
   }
 };
