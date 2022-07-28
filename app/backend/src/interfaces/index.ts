@@ -1,5 +1,4 @@
 import { Request } from 'express';
-// import { JwtPayload } from 'jsonwebtoken';
 
 // LOGIN INTERFACES
 
@@ -51,4 +50,23 @@ export interface ITeamsModel {
 export interface ITeamsService {
   findAll(): Promise<ITeams[]>
   findByPk(id: number): Promise<ITeams | null>
+}
+
+// MATCHES INTERFACES
+
+export interface IMatches {
+  id: number;
+  homeTeam: number;
+  homeTeamGoals: number;
+  awayTeam: number;
+  awayTeamGoals: number;
+  inProgress: boolean;
+}
+
+export interface IMatchesModel {
+  findAll(): Promise<IMatches[]>
+}
+
+export interface IMatchesService {
+  findAll(): Promise<IMatches[]>
 }
