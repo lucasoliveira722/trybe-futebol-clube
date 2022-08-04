@@ -31,4 +31,14 @@ export default class MatchesController {
       next(error);
     }
   }
+
+  async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = parseInt(req.params.id, 10);
+      const updateMatch = await this.service.update(id);
+      return res.status(200).json({ message: updateMatch });
+    } catch (error) {
+      next(error);
+    }
+  }
 }

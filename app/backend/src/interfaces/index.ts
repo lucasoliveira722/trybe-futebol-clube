@@ -73,9 +73,11 @@ export interface IInsertMatch {
 export interface IMatchesModel {
   findAll(): Promise<IMatches[]>
   create(insertedMatch: IInsertMatch): Promise<IMatches>
+  update(id: number): Promise<string>
 }
 
 export interface IMatchesService {
   findAll(): Promise<IMatches[]>
   create(insertedMatch: IInsertMatch): Promise<IMatches>
+  update(id: number): Promise<string>
 }
