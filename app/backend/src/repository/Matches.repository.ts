@@ -1,6 +1,7 @@
 import Teams from '../database/models/Teams.models';
 import Matches from '../database/models/Matches.models';
 import { IMatches, IMatchesModel, IInsertMatch } from '../interfaces';
+import HttpException from '../middlewares/HttpExceptions';
 
 export default class MatchesRepository implements IMatchesModel {
   constructor(private model = Matches) {
@@ -18,6 +19,9 @@ export default class MatchesRepository implements IMatchesModel {
   }
 
   async create(insertedMatch: IInsertMatch): Promise<IMatches> {
+    if (insertedMatch.homeTeam === insertedMatch.awayTeam) {
+      throw new HttpException(401, 'It is not possible to create a match with two equal teams');
+    }
     const newMatch = await this.model.create({
       homeTeam: insertedMatch.homeTeam,
       homeTeamGoals: insertedMatch.homeTeamGoals,
@@ -25,15 +29,6 @@ export default class MatchesRepository implements IMatchesModel {
       awayTeamGoals: insertedMatch.awayTeamGoals,
       inProgress: true,
     });
-    // const formattedMatch = {
-    //   id: newMatch.id,
-    //   homeTeam: newMatch.homeTeam,
-    //   homeTeamGoals: newMatch.homeTeamGoals,
-    //   awayTeam: newMatch.awayTeam,
-    //   awayTeamGoals: newMatch.awayTeamGoals,
-    //   inProgress: true,
-    // };
-    newMatch.inProgress = true;
     return newMatch;
   }
 }

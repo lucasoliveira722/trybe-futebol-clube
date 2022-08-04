@@ -19,6 +19,7 @@ export default class MatchesController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals } = req.body;
+
       const newMatch = await this.service.create({
         homeTeam,
         homeTeamGoals,
