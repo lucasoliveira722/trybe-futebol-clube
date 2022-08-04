@@ -70,14 +70,21 @@ export interface IInsertMatch {
   awayTeamGoals: number;
 }
 
+export interface IUpdateGoals {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+}
+
 export interface IMatchesModel {
   findAll(): Promise<IMatches[]>
   create(insertedMatch: IInsertMatch): Promise<IMatches>
-  update(id: number): Promise<string>
+  updateProgress(id: number): Promise<string>
+  updateGoals(id: number, newGoals: IUpdateGoals): Promise<string>
 }
 
 export interface IMatchesService {
   findAll(): Promise<IMatches[]>
   create(insertedMatch: IInsertMatch): Promise<IMatches>
-  update(id: number): Promise<string>
+  updateProgress(id: number): Promise<string>
+  updateGoals(id: number, newGoals: IUpdateGoals): Promise<string>
 }

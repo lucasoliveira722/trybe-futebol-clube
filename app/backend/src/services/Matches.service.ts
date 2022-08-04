@@ -1,4 +1,11 @@
-import { IInsertMatch, IMatches, IMatchesModel, IMatchesService, ITeamsModel } from '../interfaces';
+import {
+  IInsertMatch,
+  IMatches,
+  IMatchesModel,
+  IMatchesService,
+  ITeamsModel,
+  IUpdateGoals,
+} from '../interfaces';
 import HttpException from '../middlewares/HttpExceptions';
 
 export default class MatchesService implements IMatchesService {
@@ -29,8 +36,13 @@ export default class MatchesService implements IMatchesService {
     return newMatch;
   }
 
-  async update(id: number): Promise<string> {
-    const finishMatch = this.model.update(id);
+  async updateProgress(id: number): Promise<string> {
+    const finishMatch = this.model.updateProgress(id);
     return finishMatch;
+  }
+
+  async updateGoals(id: number, newGoals: IUpdateGoals): Promise<string> {
+    const updateGoals = this.model.updateGoals(id, newGoals);
+    return updateGoals;
   }
 }
