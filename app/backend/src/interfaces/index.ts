@@ -60,13 +60,22 @@ export interface IMatches {
   homeTeamGoals: number;
   awayTeam: number;
   awayTeamGoals: number;
-  inProgress: boolean;
+  inProgress?: boolean;
+}
+
+export interface IInsertMatch {
+  homeTeam: number;
+  awayTeam: number;
+  homeTeamGoals: number;
+  awayTeamGoals: number;
 }
 
 export interface IMatchesModel {
   findAll(): Promise<IMatches[]>
+  create(insertedMatch: IInsertMatch): Promise<IMatches>
 }
 
 export interface IMatchesService {
   findAll(): Promise<IMatches[]>
+  create(insertedMatch: IInsertMatch): Promise<IMatches>
 }
