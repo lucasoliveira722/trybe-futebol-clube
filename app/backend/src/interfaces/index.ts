@@ -61,6 +61,16 @@ export interface IMatches {
   awayTeam: number;
   awayTeamGoals: number;
   inProgress?: boolean;
+  teamHome?: teamHome;
+  teamAway?: teamAway;
+}
+
+export interface teamHome {
+  teamName: string;
+}
+
+export interface teamAway {
+  teamName: string;
 }
 
 export interface IInsertMatch {
@@ -87,4 +97,28 @@ export interface IMatchesService {
   create(insertedMatch: IInsertMatch): Promise<IMatches>
   updateProgress(id: number): Promise<string>
   updateGoals(id: number, newGoals: IUpdateGoals): Promise<string>
+}
+
+// LEADERBOARD INTERFACES
+
+export interface ILeaderboard {
+  name: string;
+  totalPoints: number;
+  totalGames: number;
+  totalVictories: number;
+  totalDraws: number;
+  totalLosses: number;
+  goalsFavor: number;
+  goalsOwn: number;
+  goalsBalance: number;
+  efficiency: number;
+}
+
+export interface ILeaderboardModel {
+  getTeamsArray(): Promise<ILeaderboard[]>;
+  findAll(): Promise<IMatches[]>
+}
+
+export interface ILeaderboardService {
+  findAll(): Promise<ILeaderboard[]>
 }
