@@ -20,6 +20,8 @@ export default class LeaderboardRepository implements ILeaderboardModel {
     return matchesList;
   }
 
+  // FUNÇÕES UTILIZADAS NO ENDPOINT leaderboard/home
+
   static setObject(curr: Required<IMatches>, matchesList: IMatches[]) {
     const objFormat = {
       name: curr.teamHome.teamName,
@@ -53,5 +55,14 @@ export default class LeaderboardRepository implements ILeaderboardModel {
       || b.goalsOwn - a.goalsOwn
       ));
     return leaderboardList;
+  }
+
+  static filterArray(a:ILeaderboard, b:ILeaderboard) {
+    return (b.totalPoints - a.totalPoints
+      || b.totalVictories - a.totalVictories
+      || b.goalsBalance - a.goalsBalance
+      || b.goalsFavor - a.goalsFavor
+      || b.goalsOwn - a.goalsOwn
+    );
   }
 }
