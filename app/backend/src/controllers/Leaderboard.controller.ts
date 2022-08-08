@@ -14,4 +14,13 @@ export default class LeaderboarController {
       next(error);
     }
   }
+
+  async findAllAway(req: Request, res: Response, next: NextFunction) {
+    try {
+      const leaderboard = await this.service.findAllAway();
+      return res.status(200).json(leaderboard);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

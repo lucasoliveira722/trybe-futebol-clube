@@ -115,10 +115,12 @@ export interface ILeaderboard {
 }
 
 export interface ILeaderboardModel {
-  getTeamsArray(): Promise<ILeaderboard[]>;
   findAll(): Promise<IMatches[]>
+  getTeamsArray(): Promise<ILeaderboard[]>;
+  getTeamsArrayAway(): Promise<ILeaderboard[]>;
 }
 
 export interface ILeaderboardService {
   findAll(): Promise<ILeaderboard[]>
+  findAllAway(): Promise<ILeaderboard[]>
 }

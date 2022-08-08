@@ -9,4 +9,9 @@ export default class LeaderboardService implements ILeaderboardService {
     const leaderboard = this.model.getTeamsArray();
     return leaderboard;
   }
+
+  findAllAway(): Promise<ILeaderboard[]> {
+    const leaderboard = this.model.getTeamsArrayAway();
+    return leaderboard;
+  }
 }
