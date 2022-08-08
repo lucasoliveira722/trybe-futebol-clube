@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import Matches from '../database/models/Matches.models';
 
 // LOGIN INTERFACES
 
@@ -63,6 +64,15 @@ export interface IMatches {
   inProgress?: boolean;
   teamHome?: teamHome;
   teamAway?: teamAway;
+}
+
+export interface IMatchesTest extends Matches {
+  teamHome: {
+    teamName: string
+  },
+  teamAway: {
+    teamName: string
+  }
 }
 
 export interface teamHome {

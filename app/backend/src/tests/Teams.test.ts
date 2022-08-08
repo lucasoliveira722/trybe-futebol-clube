@@ -111,5 +111,9 @@ describe('Teste da rota GET do teams ', () => {
       expect(chaiHttpResponse.body).to.have.keys('id', 'teamName')
     })
 
+  });
+
+  describe('Criando novas partidas - POST', () => {
+    let chaiHttpResponse: Response;
   })
 });
