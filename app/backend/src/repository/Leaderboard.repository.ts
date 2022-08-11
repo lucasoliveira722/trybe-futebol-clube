@@ -20,6 +20,19 @@ export default class LeaderboardRepository implements ILeaderboardModel {
     return matchesList;
   }
 
+  async getTeamsArray(): Promise<ILeaderboard[]> {
+    const matchesList = await this.findAll();
+    const homeTeams = matchesList.reduce((acc: ILeaderboard[], curr: IMatches) => {
+      if (!acc.some((team: ILeaderboard) => team.name === curr.teamHome?.teamName)) {
+        acc.push(LeaderboardRepository.setObject(curr as Required<IMatches>, matchesList));
+      }
+      return acc;
+    }, []);
+
+    const filteredHomeTeams = LeaderboardRepository.filterArray(homeTeams);
+    return filteredHomeTeams;
+  }
+
   static setObject(curr: Required<IMatches>, matchesList: IMatches[]) {
     const objFormat = {
       name: curr.teamHome.teamName,
@@ -32,22 +45,6 @@ export default class LeaderboardRepository implements ILeaderboardModel {
       goalsOwn: utils.getGoalsOwn(curr.teamHome.teamName, matchesList),
       goalsBalance: utils.getGoalsBalance(curr.teamHome.teamName, matchesList),
       efficiency: utils.getEfficiency(curr.teamHome.teamName, matchesList),
-    };
-    return objFormat;
-  }
-
-  static setObjectAway(curr: Required<IMatches>, matchesList: IMatches[]) {
-    const objFormat = {
-      name: curr.teamAway.teamName,
-      totalPoints: utils.getTotalPointsAway(curr.teamAway.teamName, matchesList),
-      totalGames: utils.getTotalGamesAway(curr.teamAway.teamName, matchesList),
-      totalVictories: utils.getTotalVictoriesAway(curr.teamAway.teamName, matchesList),
-      totalDraws: utils.getTotalDrawsAway(curr.teamAway.teamName, matchesList),
-      totalLosses: utils.getTotalLossesAway(curr.teamAway.teamName, matchesList),
-      goalsFavor: utils.getGoalsFavorAway(curr.teamAway.teamName, matchesList),
-      goalsOwn: utils.getGoalsOwnAway(curr.teamAway.teamName, matchesList),
-      goalsBalance: utils.getGoalsBalanceAway(curr.teamAway.teamName, matchesList),
-      efficiency: utils.getEfficiencyAway(curr.teamAway.teamName, matchesList),
     };
     return objFormat;
   }
@@ -66,17 +63,20 @@ export default class LeaderboardRepository implements ILeaderboardModel {
     return filteredAwayTeams;
   }
 
-  async getTeamsArray(): Promise<ILeaderboard[]> {
-    const matchesList = await this.findAll();
-    const homeTeams = matchesList.reduce((acc: ILeaderboard[], curr: IMatches) => {
-      if (!acc.some((team: ILeaderboard) => team.name === curr.teamHome?.teamName)) {
-        acc.push(LeaderboardRepository.setObject(curr as Required<IMatches>, matchesList));
-      }
-      return acc;
-    }, []);
-
-    const filteredHomeTeams = LeaderboardRepository.filterArray(homeTeams);
-    return filteredHomeTeams;
+  static setObjectAway(curr: Required<IMatches>, matchesList: IMatches[]) {
+    const objFormat = {
+      name: curr.teamAway.teamName,
+      totalPoints: utils.getTotalPointsAway(curr.teamAway.teamName, matchesList),
+      totalGames: utils.getTotalGamesAway(curr.teamAway.teamName, matchesList),
+      totalVictories: utils.getTotalVictoriesAway(curr.teamAway.teamName, matchesList),
+      totalDraws: utils.getTotalDrawsAway(curr.teamAway.teamName, matchesList),
+      totalLosses: utils.getTotalLossesAway(curr.teamAway.teamName, matchesList),
+      goalsFavor: utils.getGoalsFavorAway(curr.teamAway.teamName, matchesList),
+      goalsOwn: utils.getGoalsOwnAway(curr.teamAway.teamName, matchesList),
+      goalsBalance: utils.getGoalsBalanceAway(curr.teamAway.teamName, matchesList),
+      efficiency: utils.getEfficiencyAway(curr.teamAway.teamName, matchesList),
+    };
+    return objFormat;
   }
 
   static filterArray(list: ILeaderboard[]) {
